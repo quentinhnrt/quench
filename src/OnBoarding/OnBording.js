@@ -1,72 +1,73 @@
 import { StyleSheet, View, Text, Button, ImageBackground, Dimensions, TouchableOpacity } from "react-native";
 import { React, useState, useEffect } from "react";
 import Login from "./components/Login";
+import Register from "./components/Register";
+import Animated, {
+    useSharedValue,
+    withTiming,
+    useAnimatedStyle,
+    Easing,
+} from 'react-native-reanimated';
 
 
 
 
 
 export default function OnBoarding() {
-    const [login, setlogin] = useState(false);
-    const [signup, setsignup] = useState(false);
-    const [formStyle, setformStyle] = useState([style.formContainer, style.formContainerHidden]);
+    const [form, setForm] = useState(false);
+    const [formStyle, setformStyle] = useState([styles.formContainer, styles.formContainerHidden]);
+    const translateValue = useSharedValue(Dimensions.get('window').height);
 
-    function setSignup() {
-        setsignup(true);
-        setlogin(false);
-    }
+    const config = {
+        duration: 1000,
+        easing: Easing.bezier(0.5, 0.01, 0, 1),
+    };
 
-    function setLogin() {
-        setsignup(false);
-        setlogin(true);
-    }
+    const style = useAnimatedStyle(() => {
+        return {
+            top: withTiming(translateValue.value, config),
+        };
+    });
 
-    function resetStyle() {
-        if (login) {
-            setLogin(false);
-        } else if (signup) {
-            setSignup(false);
-        }
-        setformStyle([style.formContainer, style.formContainerHidden]);
+    if(!form){
+        translateValue.value = Dimensions.get('window').height;
     }
 
     useEffect(() => {
-        if (login || signup) {
-            setformStyle([style.formContainer, style.formContainerShow]);
-        } else if (!login && !signup) {
-            setformStyle([style.formContainer, style.formContainerHidden]);
+        if (form) {
+            translateValue.value = 0;
         }
-    }, [login, signup]);
+    }, [form]);
 
 
     return (
         <View style={{ backgroundColor: '#3a3f41' }} >
-            <ImageBackground source={require('../../assets/background.jpg')} resizeMode="cover" style={style.container} blurRadius={3}>
-                <View style={style.buttonsContainer}>
-                    <TouchableOpacity onPress={setSignup} style={style.registerButton}>
-                        <Text style={[style.textButton, { color: 'white' }]}>REGISTER</Text>
+            <ImageBackground source={require('../../assets/background.jpg')} resizeMode="cover" style={styles.container} blurRadius={3}>
+                <View style={styles.buttonsContainer}>
+                    <TouchableOpacity onPress={() => setForm('register')} style={styles.registerButton}>
+                        <Text style={[styles.textButton, { color: 'white' }]}>REGISTER</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={setLogin} style={style.loginButton}>
-                        <Text style={style.textButton}>LOGIN</Text>
+                    <TouchableOpacity onPress={() => setForm('login')} style={styles.loginButton}>
+                        <Text style={styles.textButton}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={formStyle}>
-                    <View style={{ backgroundColor: '#82461B', width: '100%', height: '70px', alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ color: 'white', fontSize: 25, textAlign: 'center', fontFamily: 'Roboto'}}>Login</Text>
+                <Animated.View style={[formStyle, style]}>
+                    <View style={{ backgroundColor: '#82461B', width: '100%', height: '70px', alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0 }}>
+                        <Text style={{ color: 'white', fontSize: 25, textAlign: 'center', fontFamily: 'Roboto' }}>{form === 'login' ? 'Login' : 'Register'}</Text>
                     </View>
-                    <View style={{padding: 20,}}>
-                        {login ? <Login /> : null}
-                        {signup ? <Text>Signup</Text> : null}
-                        <Button title="Close" onPress={resetStyle} />
+                    <View style={{ padding: 20, }}>
+                        {form === 'login' ? <Login /> : null}
+                        {form === 'register' ? <Register /> : null}
+                        <Button title="Close" onPress={() => setForm(false)} />
                     </View>
-                </View>
+                </Animated.View>
             </ImageBackground>
         </View>
     );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width,
@@ -113,5 +114,6 @@ const style = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         overflow: 'hidden',
+        justifyContent: 'center',
     }
 });

@@ -1,11 +1,25 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from "react-native";
+import { React, useState, useEffect } from "react";
 
 export default function Login() {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    function login() {
+        console.log(email, password);
+    }
+
     return (
-        <View>
-            <TextInput style={style.inputs} placeholder="Email" />
-            <TextInput style={style.inputs} secureTextEntry={true} placeholder="Password" />
-        </View> 
+        <View style={{ gap: 20}}>
+            <View>
+                <TextInput style={style.inputs} onChangeText={(e) => setEmail(e)} placeholder="Email" />
+                <TextInput style={style.inputs} secureTextEntry={true} onChangeText={(e) => setPassword(e)} placeholder="Password" />
+            </View>
+            <TouchableOpacity onPress={() => login()} style={style.buttonStyle}>
+                <Text>Login</Text>
+            </TouchableOpacity>
+        </View>
     );
 }
 
@@ -19,4 +33,15 @@ const style = StyleSheet.create({
         borderRadius: 10,
         margin: 10,
     },
+    buttonStyle: {
+        borderColor: 'lightgrey',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        paddingVertical: 2,
+        width: '25%',
+        marginLeft: 'auto',
+        borderRadius: 10,
+        margin: 10,
+        alignItems: 'center',
+    }
 })
