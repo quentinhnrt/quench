@@ -1,5 +1,6 @@
 import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { React, useState, useEffect } from "react";
+import AuthHelper from "../helpers/AuthHelper";
 
 export default function Login() {
 
@@ -7,7 +8,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
 
     function login() {
-        console.log(email, password);
+        new AuthHelper().login(email, password);
     }
 
     return (
