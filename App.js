@@ -1,15 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Card from './card';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import OnBoarding from './src/OnBoarding/OnBording';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-     <Card stamps={6} company={"Starbuck"}/>
-     <Card stamps={6} company={"GG"}/>
-     <Card stamps={6} company={"no ideia"}/>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen options={{ headerShown: false }} name="OnBoarding" component={OnBoarding} />
+      </Stack.Navigator>
+    </NavigationContainer>
+
   );
 }
 
