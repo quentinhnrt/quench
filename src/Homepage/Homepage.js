@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import {globalStyles} from "../global";
 import Card from "../Card/Card";
 
-
 export default function Homepage({props,navigation}) {
     const [reviews]= useState([
         {title:'Starbucks', body: 'lorem ipsum' },
