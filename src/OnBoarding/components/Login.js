@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { React, useState, useEffect } from "react";
-import AuthHelper from "../helpers/AuthHelper";
+import AuthHelper from "../../helpers/AuthHelper";
 
 export default function Login() {
 
