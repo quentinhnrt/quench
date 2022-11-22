@@ -7,6 +7,7 @@ import Homepage from './src/Homepage/Homepage';
 import Header from './src/Header';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BottomBar from './src/BottomBar';
+import Camera from "./src/Camera/Camera";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,7 +24,7 @@ export default function App() {
         <Tab.Screen options={{ headerShown: false }} name="OnBoarding" component={OnBoarding} />
         <Tab.Screen name="Profile" component={Homepage} />
         <Tab.Screen name='StoreMap' component={Homepage} />
-        <Tab.Screen name='Camera' component={Homepage} />
+        <Tab.Screen name='Camera' component={Camera} />
       </Tab.Navigator>
     </NavigationContainer>
 

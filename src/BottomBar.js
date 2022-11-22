@@ -16,7 +16,7 @@ export default function BottomBar({ state, descriptors, navigation }) {
       </TouchableHighlight>
 
       <TouchableHighlight onPress={() => navigation.navigate('Camera')} style={{transform: [{translateY: '-70%'}]}}>
-        <LinearGradient colors={['#E16710', '#6D3711']} style={{width: 60, height: 60, alignItems: 'center', borderRadius: '100%' }}>
+        <LinearGradient colors={['#E16710', '#6D3711']} style={{width: 60, height: 60, alignItems: 'center', borderRadius: '100%', justifyContent: 'center' }}>
           <Text style={{ fontSize: 40, color: 'white', textAlign: 'center' }}>+</Text>
         </LinearGradient>
       </TouchableHighlight>
