@@ -15,8 +15,8 @@ export default function BottomBar({ state, descriptors, navigation }) {
         <Image source={require('../assets/store.svg')} style={{ width: 48, height: 43 }} />
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={() => navigation.navigate('Camera')} style={{transform: [{translateY: '-70%'}]}}>
-        <LinearGradient colors={['#E16710', '#6D3711']} style={{width: 60, height: 60, alignItems: 'center', borderRadius: '100%', justifyContent: 'center' }}>
+      <TouchableHighlight onPress={() => navigation.navigate('Camera')} style={{transform: [{translateY: -40}]}}>
+        <LinearGradient colors={['#E16710', '#6D3711']} style={{width: 60, height: 60, alignItems: 'center', borderRadius: 100 }}>
           <Text style={{ fontSize: 40, color: 'white', textAlign: 'center' }}>+</Text>
         </LinearGradient>
       </TouchableHighlight>
