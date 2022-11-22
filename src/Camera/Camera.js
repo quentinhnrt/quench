@@ -1,9 +1,13 @@
 import {Text, View, StyleSheet} from "react-native";
+import {useEffect, useState} from "react";
 
 export default function Camera() {
     const [hasPermission, setHasPermission] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
+    const [scanned, setScanned] = useState(false);
 
+    useEffect(() => {
+
+    });
     return (
         <View style={styles.container}>
             <Text>Camera</Text>
