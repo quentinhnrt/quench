@@ -1,40 +1,36 @@
-import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { Component } from 'react'
+import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native'
+import React, {Component} from 'react'
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default class Header extends Component {
-  constructor(navigation) {
-    super(navigation)
-  }
-  render() {
+
+export default function Header ({ navigation }) {
+
     return (
-      <View style={styles.headerWrapper}>
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Image source={require('../assets/house.png')} style={{
-            width: 30,
-            height: 30,
-          }} />
-        </TouchableOpacity>
-      </View>
+        <View style={styles.headerWrapper}>
+            <Image source={require('../assets/logo.png')} style={styles.logo}/>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <Ionicons name="home" size={30} color="white"/>
+            </TouchableOpacity>
+        </View>
     )
-  }
 }
 
 const styles = StyleSheet.create({
-  headerWrapper: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    backgroundColor: '#874F28',
-    height: 80,
-    paddingHorizontal: 20,
-  },
-  logo: {
-    height: '75%',
-    aspectRatio: 1,
-    backgroundColor: 'white',
-    borderRadius: 100,
-  },
+    headerWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 40,
+        paddingBottom: 10,
+        backgroundColor: '#874F28'
+
+    },
+    logo: {
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
+        backgroundColor: 'white',
+        borderRadius: 100
+    }
 });
