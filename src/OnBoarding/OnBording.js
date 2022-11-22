@@ -1,5 +1,5 @@
-import { StyleSheet, View, Text, Button, ImageBackground, Dimensions, TouchableOpacity } from "react-native";
-import { React, useState, useEffect } from "react";
+import {StyleSheet, View, Text, Button, ImageBackground, Dimensions, TouchableOpacity} from "react-native";
+import {React, useState, useEffect} from "react";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Animated, {
@@ -8,9 +8,6 @@ import Animated, {
     useAnimatedStyle,
     Easing,
 } from 'react-native-reanimated';
-
-
-
 
 
 export default function OnBoarding() {
@@ -29,7 +26,7 @@ export default function OnBoarding() {
         };
     });
 
-    if(!form){
+    if (!form) {
         translateValue.value = Dimensions.get('window').height;
     }
 
@@ -41,27 +38,42 @@ export default function OnBoarding() {
 
 
     return (
-        <View style={{ backgroundColor: '#3a3f41' }} >
-            <ImageBackground source={require('../../assets/background.jpg')} resizeMode="cover" style={styles.container} blurRadius={3}>
+        <View style={{backgroundColor: '#3a3f41', flex: 1}}>
+            <ImageBackground source={require('../../assets/background.jpg')} resizeMode="cover" style={styles.container}
+                             blurRadius={3}>
+
                 <View style={styles.buttonsContainer}>
                     <TouchableOpacity onPress={() => setForm('register')} style={styles.registerButton}>
-                        <Text style={[styles.textButton, { color: 'white' }]}>REGISTER</Text>
+                        <Text style={[styles.textButton, {color: 'white'}]}>REGISTER</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => setForm('login')} style={styles.loginButton}>
                         <Text style={styles.textButton}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
-                <Animated.View style={[formStyle, style]}>
-                    <View style={{ backgroundColor: '#82461B', width: '100%', height: '70px', alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0 }}>
-                        <Text style={{ color: 'white', fontSize: 25, textAlign: 'center', fontFamily: 'Roboto' }}>{form === 'login' ? 'Login' : 'Register'}</Text>
+                <Animated.View style={[style, formStyle]}>
+                    <View style={{
+                        backgroundColor: '#82461B',
+                        width: '100%',
+                        height: 70,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0
+                    }}>
+                        <Text style={{
+                            color: 'white',
+                            fontSize: 25,
+                            textAlign: 'center',
+                            fontFamily: 'Roboto'
+                        }}>{form === 'login' ? 'Login' : 'Register'}</Text>
                     </View>
-                    <View style={{ padding: 20, }}>
-                        {form === 'login' ? <Login /> : null}
-                        {form === 'register' ? <Register /> : null}
-                        <Button title="Close" onPress={() => setForm(false)} />
+                    <View style={{padding: 20,}}>
+                        {form === 'login' ? <Login/> : null}
+                        {form === 'register' ? <Register/> : null}
+                        <Button title="Close" onPress={() => setForm(false)}/>
                     </View>
                 </Animated.View>
+
             </ImageBackground>
         </View>
     );
@@ -69,17 +81,13 @@ export default function OnBoarding() {
 
 const styles = StyleSheet.create({
     container: {
-        height: Dimensions.get('window').height,
-        width: Dimensions.get('window').width,
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
     buttonsContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'end',
-        gap: 20,
         width: '65%',
-        marginHorizontal: 'auto',
-        marginBottom: '20vh',
+        marginBottom: 150,
     },
     textButton: {
         fontSize: 14,
@@ -98,15 +106,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: 30,
     },
     formContainerHidden: {
-        transform: [{ translateY: '100%' }],
+        transform: [{translateY: 100}],
     },
     formContainerShow: {
-        transform: [{ translateY: '0%' }],
+        transform: [{translateY: 0}],
     },
     formContainer: {
-        height: '50vh',
         width: '100%',
         backgroundColor: 'white',
         position: 'absolute',
@@ -114,6 +122,5 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         overflow: 'hidden',
-        justifyContent: 'center',
     }
-});
+})

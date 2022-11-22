@@ -5,11 +5,12 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 export default function BottomBar({state, descriptors, navigation}) {
-
     const currentRoute = state.routes[state.index].name;
 
     let mapColor = currentRoute === "StoreMap" ? "#874F28" : "#909090";
     let profileColor = currentRoute === "Profile" ? "#874F28" : "#909090";
+
+
 
     if (state.routes[state.index].name === 'OnBoarding') {
         return null

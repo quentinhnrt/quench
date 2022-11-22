@@ -1,10 +1,9 @@
-import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native'
-import React, {Component} from 'react'
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import React from 'react'
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 
 export default function Header ({ navigation }) {
-
     return (
         <View style={styles.headerWrapper}>
             <Image source={require('../assets/logo.png')} style={styles.logo}/>
