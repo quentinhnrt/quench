@@ -8,34 +8,31 @@ import Animated, {
     useAnimatedStyle,
     Easing,
 } from 'react-native-reanimated';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-export default function OnBoarding() {
-    const [form, setForm] = useState(false);
+export default function OnBoarding({navigation}) {
+
+
+
+    const [form, setForm] = useState(null);
     const [formStyle, setformStyle] = useState([styles.formContainer, styles.formContainerHidden]);
-    const translateValue = useSharedValue(Dimensions.get('window').height);
-
-    const config = {
-        duration: 1000,
-        easing: Easing.bezier(0.5, 0.01, 0, 1),
-    };
-
-    const style = useAnimatedStyle(() => {
-        return {
-            top: withTiming(translateValue.value, config),
-        };
-    });
-
-    if (!form) {
-        translateValue.value = Dimensions.get('window').height;
-    }
 
     useEffect(() => {
-        if (form) {
-            translateValue.value = 0;
+        AsyncStorage.getItem('user').then((user) => {
+            if(user !== null) {
+                navigation.navigate('Home');
+            }
+        });
+    })
+
+    useEffect(() => {
+        if(form) {
+            setformStyle([styles.formContainer, styles.formContainerShow]);
+        }else{
+            setformStyle([styles.formContainer, styles.formContainerHidden]);
         }
     }, [form]);
-
 
     return (
         <View style={{backgroundColor: '#3a3f41', flex: 1}}>
@@ -51,14 +48,13 @@ export default function OnBoarding() {
                         <Text style={styles.textButton}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
-                <Animated.View style={[style, formStyle]}>
+                <View style={[formStyle]}>
                     <View style={{
                         backgroundColor: '#82461B',
                         width: '100%',
                         height: 70,
-                        position: 'absolute',
-                        top: 0,
-                        left: 0
+                        alignItems: 'center',
+                        justifyContent: 'center',
                     }}>
                         <Text style={{
                             color: 'white',
@@ -68,11 +64,11 @@ export default function OnBoarding() {
                         }}>{form === 'login' ? 'Login' : 'Register'}</Text>
                     </View>
                     <View style={{padding: 20,}}>
-                        {form === 'login' ? <Login/> : null}
+                        {form === 'login' ? <Login navigation={navigation} /> : null}
                         {form === 'register' ? <Register/> : null}
                         <Button title="Close" onPress={() => setForm(false)}/>
                     </View>
-                </Animated.View>
+                </View>
 
             </ImageBackground>
         </View>
@@ -109,7 +105,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     formContainerHidden: {
-        transform: [{translateY: 100}],
+        transform: [{translateY: 300}],
     },
     formContainerShow: {
         transform: [{translateY: 0}],

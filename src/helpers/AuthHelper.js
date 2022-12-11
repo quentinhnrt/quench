@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const bcrypt = require('react-native-bcrypt');
 
 export default class AuthHelper {
@@ -36,11 +38,12 @@ export default class AuthHelper {
     }
 
     login(email, password) {
-        password = bcrypt.hashSync(password, 10);
-        let password2 = bcrypt.hashSync(password, 10);
-
-        let test = bcrypt.compareSync(password, password2);
-
-        console.log(test);
+        let customers = require('../../data/customer.json');
+        if(customers.email === email && customers.password === password) {
+            AsyncStorage.setItem('user', JSON.stringify(customers));
+            return true;
+        }else{
+            return 'Email or password is not valid';
+        }
     }
 }

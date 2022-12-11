@@ -1,0 +1,14 @@
+[
+  {
+    "userId": 1,
+    "storeId": 2,
+    "nbr": 4,
+    "expirationDate": "2022-12-31"
+  },
+  {
+    "userId": 1,
+    "storeId": 1,
+    "nbr": 9,
+    "expirationDate": "2023-05-31"
+  }
+]
